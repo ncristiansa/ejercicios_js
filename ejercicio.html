@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hola Mundo con AJAX</title>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script>
+      $( document ).ready(function() {
+        var div = $("#calculadora");
+        var inputNumberOne = $("<input>").attr({'type':'number', 'name':'numero1'});
+        var inputNumberTwo = $("<input>").attr({'type':'number', 'name':'numero2'});
+        var buttomSend = $("<input>").attr({'type':'submit', 'name':'enviar', 'value':'Send'});
+        
+        div.append(inputNumberOne);
+        div.append(inputNumberTwo);
+        div.append(buttomSend);
+        $("input[name='enviar']").on("click",descargaArchivo);
+      });
+  </script>
+    <script type="text/javascript">
+      
+      function descargaArchivo() {
+        var numero1 = $("input[name='numero1']").val();
+        var numero2 = $("input[name='numero2']").val();
+        // Obtener la instancia del objeto XMLHttpRequest
+        if(window.XMLHttpRequest) {
+          peticion_http = new XMLHttpRequest();
+        }
+        else if(window.ActiveXObject) {
+          peticion_http = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        // Preparar la funcion de respuesta
+        peticion_http.onreadystatechange = muestraContenido;
+
+        // Realizar peticion HTTP
+        peticion_http.open('GET', 'http://localhost/ejercicios_js/calculadora.php?num1='+numero1+'&'+'num2='+numero2, true);
+        peticion_http.send(null);
+
+        function muestraContenido() {
+          if(peticion_http.readyState == 4) {
+            if(peticion_http.status == 200) {
+              alert(peticion_http.responseText);
+            }
+          }
+        }
+      }
+
+    //window.onload = descargaArchivo;
+    </script>
+  </head>
+  <body>
+    <div id="calculadora">
+
+    </div>
+  </body>
+</html>
