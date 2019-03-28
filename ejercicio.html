@@ -9,7 +9,18 @@
         var inputNumberOne = $("<input>").attr({'type':'number', 'name':'numero1'});
         var inputNumberTwo = $("<input>").attr({'type':'number', 'name':'numero2'});
         var buttomSend = $("<input>").attr({'type':'submit', 'name':'enviar', 'value':'Send'});
-        
+        var select = $("<select>").attr({'id':'opts', 'name':'opts'});
+        var optSelect = $("<option>", {text:"Selecciona"}).attr({'name':'optselect'});
+        var optSuma = $("<option>", {text:"Suma"}).attr({'name':'optsuma', 'value':'Suma'});
+        var optResta = $("<option>", {text:"Resta"}).attr({'name':'optresta', 'value':'Resta'});
+        var optDividir = $("<option>", {text:"Dividir"}).attr({'name':'optdividir', 'value':'Dividir'});
+        var optMultiplicar = $("<option>", {text:"Multiplicar"}).attr({'name':'optmultiplicar', 'value':'Multiplicar'});
+        select.append(optSelect);
+        select.append(optSuma);
+        select.append(optResta);
+        select.append(optDividir);
+        select.append(optMultiplicar);
+        div.append(select);
         div.append(inputNumberOne);
         div.append(inputNumberTwo);
         div.append(buttomSend);
@@ -21,6 +32,7 @@
       function descargaArchivo() {
         var numero1 = $("input[name='numero1']").val();
         var numero2 = $("input[name='numero2']").val();
+        var selectopt = $("select[name='opts']").val();
         // Obtener la instancia del objeto XMLHttpRequest
         if(window.XMLHttpRequest) {
           peticion_http = new XMLHttpRequest();
@@ -33,7 +45,7 @@
         peticion_http.onreadystatechange = muestraContenido;
 
         // Realizar peticion HTTP
-        peticion_http.open('GET', 'http://localhost/ejercicios_js/calculadora.php?num1='+numero1+'&'+'num2='+numero2, true);
+        peticion_http.open('GET', 'http://localhost/ejercicios_js/calculadora.php?num1='+numero1+'&'+'num2='+numero2+'&'+'opcion='+selectopt, true);
         peticion_http.send(null);
 
         function muestraContenido() {
