@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Hola Mundo con AJAX</title>
+    <meta charset="UTF-8">
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script>
       $( document ).ready(function() {
@@ -20,10 +21,12 @@
         select.append(optResta);
         select.append(optDividir);
         select.append(optMultiplicar);
-        div.append(select);
+        
         div.append(inputNumberOne);
         div.append(inputNumberTwo);
+        div.append(select);
         div.append(buttomSend);
+        div.append($("<p>").attr({'id':'resultado'}));
         $("input[name='enviar']").on("click",descargaArchivo);
       });
   </script>
@@ -51,7 +54,8 @@
         function muestraContenido() {
           if(peticion_http.readyState == 4) {
             if(peticion_http.status == 200) {
-              alert(peticion_http.responseText);
+              $("#resultado").text("Resultado: "+peticion_http.responseText);
+              //alert(peticion_http.responseText);
             }
           }
         }

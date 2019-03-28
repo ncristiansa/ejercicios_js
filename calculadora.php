@@ -2,16 +2,19 @@
     $num1 = $_GET["num1"];
     $num2 = $_GET["num2"];
     $optselect = $_GET["opcion"];
-    if($optselect == "Sumar")
+    if($optselect == "Suma")
     {
         echo $num1+$num2;
-    }else if($optselect == "Dividir")
+    }
+    if($optselect == "Dividir")
     {
         echo $num1/$num2;
-    }else if($optselect == "Restar")
+    }
+    if($optselect == "Resta")
     {
         echo $num1-$num2;
-    }else if($optselect == "Multiplicar")
+    }
+    if($optselect == "Multiplicar")
     {
         echo $num1*$num2;
     }
