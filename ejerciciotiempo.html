@@ -4,6 +4,13 @@
     <title>Hola Mundo con AJAX</title>
     <meta charset="UTF-8">
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script>
+      function mostrarDatos(peticionDatos, arrayCampos)
+      {
+        var ConsultaTiempo = JSON.parse(peticionDatos);
+
+      }
+    </script>
     <script type="text/javascript">
       
       function tiempo() {
@@ -25,16 +32,23 @@
         function muestraContenido() {
           if(peticion_http.readyState == 4) {
             if(peticion_http.status == 200) {
-              alert(peticion_http.responseText);
+              var ConsultaTiempo = JSON.parse(peticion_http.responseText);
+              console.log(ConsultaTiempo["name"]);
+              for(datos in ConsultaTiempo["weather"])
+              {
+                console.log(ConsultaTiempo["weather"][datos]["icon"]);
+                $("#icon").append($("<img>").attr({'src':'http://openweathermap.org/img/w/'+ConsultaTiempo["weather"][datos]["icon"]+'.png'}));
+              }
+              
             }
           }
         }
       }
 
-    //window.onload = descargaArchivo;
+    window.onload = tiempo;
     </script>
   </head>
   <body>
-      
+      <p id="icon"></p>
   </body>
 </html>
