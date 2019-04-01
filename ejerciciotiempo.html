@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hola Mundo con AJAX</title>
+    <title>AJAX - Tiempo</title>
     <meta charset="UTF-8">
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script>
+
       function mostrarDatos(peticionDatos)
       {
         
@@ -13,7 +14,7 @@
         for(datos in peticionDatos["weather"])
         {
           $("#tiempo").append($("<p>").text(peticionDatos["weather"][datos]["description"]));
-          $("#tiempo").append($("<img>").attr({'src':'http://openweathermap.org/img/w/'+peticionDatos["weather"][datos]["icon"]+'.png'}));    
+          $("#tiempo").append($("<img>").attr({'src':'http://openweathermap.org/img/w/'+peticionDatos["weather"][datos]["icon"]+'.png'}));
         }
       }
     </script>
@@ -39,7 +40,8 @@
           if(peticion_http.readyState == 4) {
             if(peticion_http.status == 200) {
               var ConsultaTiempo = JSON.parse(peticion_http.responseText);
-              mostrarDatos(ConsultaTiempo);
+              console.log(ConsultaTiempo);
+              //mostrarDatos(ConsultaTiempo);
             }
           }
         }
