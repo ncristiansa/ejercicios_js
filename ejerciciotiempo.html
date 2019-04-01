@@ -5,10 +5,16 @@
     <meta charset="UTF-8">
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script>
-      function mostrarDatos(peticionDatos, arrayCampos)
+      function mostrarDatos(peticionDatos)
       {
-        var ConsultaTiempo = JSON.parse(peticionDatos);
-
+        
+        $("#tiempo").append($("<p>").text(peticionDatos["name"]));
+        $("#tiempo").append($("<p>").text(peticionDatos["sys"]["country"]));
+        for(datos in peticionDatos["weather"])
+        {
+          $("#tiempo").append($("<p>").text(peticionDatos["weather"][datos]["description"]));
+          $("#tiempo").append($("<img>").attr({'src':'http://openweathermap.org/img/w/'+peticionDatos["weather"][datos]["icon"]+'.png'}));    
+        }
       }
     </script>
     <script type="text/javascript">
@@ -33,13 +39,7 @@
           if(peticion_http.readyState == 4) {
             if(peticion_http.status == 200) {
               var ConsultaTiempo = JSON.parse(peticion_http.responseText);
-              console.log(ConsultaTiempo["name"]);
-              for(datos in ConsultaTiempo["weather"])
-              {
-                console.log(ConsultaTiempo["weather"][datos]["icon"]);
-                $("#icon").append($("<img>").attr({'src':'http://openweathermap.org/img/w/'+ConsultaTiempo["weather"][datos]["icon"]+'.png'}));
-              }
-              
+              mostrarDatos(ConsultaTiempo);
             }
           }
         }
@@ -49,6 +49,6 @@
     </script>
   </head>
   <body>
-      <p id="icon"></p>
+      <div id="tiempo"></div>
   </body>
 </html>
