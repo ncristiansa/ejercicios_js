@@ -2,14 +2,14 @@
 
 $numerorand = rand(1,10);
 $arrayRecibida = $_REQUEST["listaAlumnos"];
-for($i=1;$i<count($arrayRecibida);$i++)
+$arrayDifrente = [];
+
+if($arrayRecibida[$numerorand] != $arrayRecibida[$numerorand])
 {
-    if($i == $numerorand){
-        
-    }else{
-        echo $arrayRecibida[$numerorand];
-    }
+    print_r("Si son iguales".$arrayRecibida[$numerorand]);
+    
+}else{
+    array_push($arrayDifrente, $arrayRecibida[$numerorand]);
+    print_r($arrayDifrente);
 }
-
-
 ?>
